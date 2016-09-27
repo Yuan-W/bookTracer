@@ -1,0 +1,1 @@
+[{"website": "book.zongheng.com", "rule": {"urlFilterText": "chapter", "xpathString": "//div[@class=\"read_con\"]//a[@href]", "urlFilterIndex": 3}}]
