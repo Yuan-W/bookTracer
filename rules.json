@@ -2,17 +2,27 @@
   {
     "website": "book.zongheng.com",
     "pattern": "http:\\/\\/book.zongheng.com\\/chapter\\/\\d+\\/\\d+.html",
-    "xpathString": "//div[@class=\"read_con\"]//a[@href]",
-    "xpathContent": "//div[@id=\"chapterContent\"]//p"
+    "charset": "utf-8",
+    "xpathContent": "//div[@id=\"chapterContent\"]//p/text()",
+    "xpathString": "//div[@class=\"read_con\"]//a[@href]"
   },
   {
     "website": "www.biquge.com.tw",
     "pattern": "http:\\/\\/www.biquge.com.tw\\/\\d+\\_\\d+\\/\\d+.html",
+    "charset": "gbk",
     "xpathString": "//div[@class=\"box_con\"]//a[@href]"
   },
   {
     "website": "www.luoqiu.com",
     "pattern": "http:\\/\\/www.luoqiu.com\\/read\\/\\d+\\/\\d+.html",
+    "charset": "gbk",
     "xpathString": "//div[@id=\"container_bookinfo\"]//a[@href]"
+  },
+  {
+    "website": "www.3gxs.com",
+    "pattern": "http:\\/\\/www.3gxs.com\\/html\\/\\d+\\/\\d+\\/\\d+.html",
+    "charset": "gbk",
+    "xpathContent": "//div[@id=\"content\"]/text()",
+    "xpathString": "//div[@class=\"booklist clearfix\"]//a[@href]"
   }
 ]

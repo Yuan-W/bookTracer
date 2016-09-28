@@ -6,7 +6,7 @@ from parser import MyHTMLParser
 import codecs
 
 def main():
-    file = "book/天工.json"
+    file = "test/无限冒险指南.json"
 
     with open(file, 'r') as fp:
         book = json.load(fp)
