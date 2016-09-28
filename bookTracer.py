@@ -1,18 +1,18 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
-from parser import HTMLParser
+from parser import MyHTMLParser
 import glob, os
 import json
 
-from pg import DB
+# from pg import DB
 
 def findRule(website):
     with open('rules.json', 'r') as fp:
         rules = json.load(fp)
 
-    return (rule['rule'] for rule in rules if rule['website'] == website).next()
+    return (rule for rule in rules if rule['website'] == website).next()
 
 def getChapters(book, depthLimit=1):
     parser = HTMLParser()

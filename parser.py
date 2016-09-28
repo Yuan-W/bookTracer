@@ -1,10 +1,15 @@
-from urllib import urlopen
+import urllib2
+import re
 from lxml import etree
 
-class HTMLParser: 
+class MyHTMLParser: 
     def getHTMLElementTree(self, url):
-        htmlContent = urlopen(url).read()
-        parser = etree.HTMLParser()
+        opener = urllib2.build_opener()
+        opener.addheaders = [('User-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36')]
+        opener.encoding = "utf-8"
+        htmlContent = opener.open(url).read()
+
+        parser = etree.HTMLParser(encoding="utf-8")
         tree = etree.fromstring(htmlContent, parser)
         return tree
 
@@ -19,6 +24,7 @@ class HTMLParser:
         xpathElements = htmlTree.xpath(rule['xpathString'])
 
         for element in xpathElements:
+            # print(etree.tostring(element))
             url = element.get('href')
             if url[0] == '/':
                 url = prefix + url
@@ -29,10 +35,20 @@ class HTMLParser:
             url = url.split('#')[0]
             splitedLink = url.split('/')
 
-            if splitedLink[rule['urlFilterIndex']] != rule['urlFilterText']:
+            prog = re.compile(rule['pattern'])
+
+            if not prog.match(url):
                 continue
             chapter = {'title':title, 'url':url}
             if chapter not in chapters:
                 chapters.append(chapter)
 
-        return chapters
+    def parseContent(self, url, rule):
+        htmlTree = self.getHTMLElementTree(url)
+
+        xpathElements = htmlTree.xpath(rule['xpathContent'])
+
+        texts = [element.text for element in xpathElements]
+        content = '\n\r'.join(texts)
+
+        return content
