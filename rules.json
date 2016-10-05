@@ -1,28 +1,50 @@
 [
   {
     "website": "book.zongheng.com",
-    "pattern": "http:\\/\\/book.zongheng.com\\/chapter\\/\\d+\\/\\d+.html",
+    "url_pattern": "http:\\/\\/book.zongheng.com\\/chapter\\/\\d+\\/\\d+.html",
     "charset": "utf-8",
-    "xpathContent": "//div[@id=\"chapterContent\"]//p/text()",
-    "xpathString": "//div[@class=\"read_con\"]//a[@href]"
+    "xpath_content": "//div[@id=\"chapterContent\"]//p/text()",
+    "xpath_chapters": "//div[@class=\"read_con\"]//a[@href]",
+    "title_pattern": "(.*)无弹窗.*"
   },
   {
     "website": "www.biquge.com.tw",
-    "pattern": "http:\\/\\/www.biquge.com.tw\\/\\d+\\_\\d+\\/\\d+.html",
+    "url_pattern": "http:\\/\\/www.biquge.com.tw\\/\\d+\\_\\d+\\/\\d+.html",
     "charset": "gbk",
-    "xpathString": "//div[@class=\"box_con\"]//a[@href]"
+    "xpath_chapters": "//div[@id=\"list\"]//a[@href]",
+    "xpath_content": "//div[@id=\"content\"]/text()",
+    "title_pattern": "(.*)_.*_.*_.*"
   },
   {
     "website": "www.luoqiu.com",
-    "pattern": "http:\\/\\/www.luoqiu.com\\/read\\/\\d+\\/\\d+.html",
+    "url_pattern": "http:\\/\\/www.luoqiu.com\\/read\\/\\d+\\/\\d+.html",
     "charset": "gbk",
-    "xpathString": "//div[@id=\"container_bookinfo\"]//a[@href]"
+    "xpath_chapters": "//div[@id=\"container_bookinfo\"]//a[@href]",
+    "xpath_content": "//div[@id=\"content\"]/text()",
+    "title_pattern": "(.*)最新章节.*"
   },
   {
     "website": "www.3gxs.com",
-    "pattern": "http:\\/\\/www.3gxs.com\\/html\\/\\d+\\/\\d+\\/\\d+.html",
+    "url_pattern": "http:\\/\\/www.3gxs.com\\/html\\/\\d+\\/\\d+\\/\\d+.html",
     "charset": "gbk",
-    "xpathContent": "//div[@id=\"content\"]/text()",
-    "xpathString": "//div[@class=\"booklist clearfix\"]//a[@href]"
+    "xpath_content": "//div[@id=\"content\"]/text()",
+    "xpath_chapters": "//div[@class=\"booklist clearfix\"]//a[@href]",
+    "title_pattern": "(.*),.*"
+  },
+  {
+    "website": "www.ziyouge.com",
+    "url_pattern": "http:\\/\\/www.ziyouge.com\\/zy\\/\\d+\\/\\d+\\/\\d+.html",
+    "charset": "gbk",
+    "xpath_chapters": "//ul[@class=\"chapter-list\"]//a[@href]",
+    "xpath_content": "//div[@id=\"htmlContent\"]/text()",
+    "title_pattern": "(.*)最新章节.*"
+  },
+  {
+    "website": "www.snwx.com",
+    "url_pattern": "http:\\/\\/www.snwx.com\\/book\\/\\d+\\/\\d+\\/\\d+.html",
+    "charset": "gbk",
+    "xpath_chapters": "//div[@id=\"list\"]//a[@href]",
+    "xpath_content": "//div[@id=\"BookText\"]/text()",
+    "title_pattern": "(.*)最新章节.*"
   }
 ]
