@@ -5,7 +5,7 @@
     "charset": "utf-8",
     "xpath_content": "//div[@id=\"chapterContent\"]//p/text()",
     "xpath_chapters": "//div[@class=\"read_con\"]//a[@href]",
-    "title_pattern": "(.*)无弹窗.*"
+    "title_pattern": "(.*)最新章节.*"
   },
   {
     "website": "www.biquge.com.tw",

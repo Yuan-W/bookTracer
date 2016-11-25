@@ -81,10 +81,10 @@ class UrlMatchingTestCase(unittest.TestCase):
     rule = self.rules.find(url)
     self.assertRegexpMatches(url, rule['url_pattern'])
 
-  def test_3gxs(self):
-    url = 'http://www.3gxs.com/html/54/54549/10818563.html'
-    rule = self.rules.find(url)
-    self.assertRegexpMatches(url, rule['url_pattern'])
+  # def test_3gxs(self):
+  #   url = 'http://www.3gxs.com/html/54/54549/10818563.html'
+  #   rule = self.rules.find(url)
+  #   self.assertRegexpMatches(url, rule['url_pattern'])
 
   def test_ziyouge(self):
     url = 'http://www.ziyouge.com/zy/11/11852/3321892.html'

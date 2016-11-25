@@ -14,10 +14,10 @@ class TraceThread(threading.Thread):
         self._book = book
 
     def run(self):
-        print "Starting thread %d" % self._threadID
+        # print "Starting thread %d" % self._threadID
         # print self._book['url']
         self.updateBook()
-        print "Exiting thread %d" % self._threadID
+        # print "Exiting thread %d" % self._threadID
 
     def getChapters(self, url, getInfo = False):
         parser = BookParser(url)

@@ -26,12 +26,12 @@ class getTitleTestCase(unittest.TestCase):
     info = parser.getBookInfo()
     self.assertEqual(title, info)
 
-  def test_3gxs(self):
-    url = 'http://www.3gxs.com/html/54/54549/index.html'
-    title = '无限冒险指南'.decode('utf-8')
-    parser = BookParser(url)
-    info = parser.getBookInfo()
-    self.assertEqual(title, info)
+  # def test_3gxs(self):
+  #   url = 'http://www.3gxs.com/html/54/54549/index.html'
+  #   title = '无限冒险指南'.decode('utf-8')
+  #   parser = BookParser(url)
+  #   info = parser.getBookInfo()
+  #   self.assertEqual(title, info)
 
   def test_ziyouge(self):
     url = 'http://www.ziyouge.com/zy/11/11852/index.html'
