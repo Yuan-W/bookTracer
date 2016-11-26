@@ -3,6 +3,7 @@
 
 import sys
 from bookParser import BookParser
+from coverParser import CoverParser
 import threading
 import glob, os, copy
 import json
@@ -17,6 +18,7 @@ class TraceThread(threading.Thread):
         # print "Starting thread %d" % self._threadID
         # print self._book['url']
         self.updateBook()
+        self.getCover()
         # print "Exiting thread %d" % self._threadID
 
     def getChapters(self, url, getInfo = False):
@@ -27,16 +29,25 @@ class TraceThread(threading.Thread):
             return chapters, parser.getBookInfo()
         return chapters
 
+    def getCover(self):
+        book = self._book
+        if 'cover' not in book:
+            parser = CoverParser(book['url'])
+            cover = parser.getCover()
+            self._book['cover'] = cover
+
+            fileName = '%s/%s.json' % (json_path, book['title'])
+            with open(fileName, 'w') as fp:
+                json.dump(book, fp)
+
     def updateBook(self):
         book = self._book
         if 'title' not in book or 'author' not in book:
             chapters, info= self.getChapters(book['url'], True)
             (book['title'], book['author'])  = info
-            print book['author']
+            # print book['author']
         else:
             chapters = self.getChapters(book['url'])
-
-        path = 'book'
 
         if('total_chapters' not in book or len(chapters) != book['total_chapters']):
             lastUpdated = 0 if 'total_chapters' not in book else book['total_chapters']
@@ -44,7 +55,7 @@ class TraceThread(threading.Thread):
             book['total_chapters'] = len(chapters)
             book['chapters'] = chapters
 
-            fileName = '%s/%s.json' % (path, book['title'])
+            fileName = '%s/%s.json' % (json_path, book['title'])
             with open(fileName, 'w') as fp:
                 json.dump(book, fp)
             print('%s updated' % book['title'])
@@ -55,11 +66,12 @@ class TraceThread(threading.Thread):
     
 
 def main():
-    path = 'book'
+    global json_path
+    json_path = 'book'
 
     i = 0
     threads = []
-    for file in glob.glob("%s/*.json" % path):
+    for file in glob.glob("%s/*.json" % json_path):
         with open(file, 'r') as fp:
             book = json.load(fp)
         thread = TraceThread(i, book)

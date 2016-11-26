@@ -2,11 +2,14 @@
   {
     "website": "book.zongheng.com",
     "url_pattern": "http:\\/\\/book.zongheng.com\\/chapter\\/\\d+\\/\\d+.html",
+    "book_page_pattern": "http://book.zongheng.com/book/(index).html",
     "charset": "utf-8",
     "xpath_content": "//div[@id=\"chapterContent\"]//p/text()",
     "xpath_chapters": "//div[@class=\"read_con\"]//a[@href]",
     "title_pattern": "(.*)最新章节.*",
+    "index_pattern": ".*/(.*).html",
     "xpath_author": "/html/body[@monkeyid='zongheng-showchapter']/@authorname",
+    "xpath_cover": "//div[@class='book_cover fl']//img/@src",
     "author_pattern": "(.*)"
   },
   {
@@ -17,34 +20,33 @@
     "xpath_content": "//div[@id=\"content\"]/text()",
     "title_pattern": "(.*)_.*_.*_.*",
     "xpath_author": "//meta[@name='keywords']/@content",
+    "xpath_cover": "//div[@id='fmimg']//img/@src",
     "author_pattern": ".*最新章节,(.*)"
   },
   {
     "website": "www.luoqiu.com",
     "url_pattern": "http:\\/\\/www.luoqiu.com\\/read\\/\\d+\\/\\d+.html",
+    "book_page_pattern": "http://www.luoqiu.com/book/(index).html",
     "charset": "gbk",
     "xpath_chapters": "//div[@id=\"container_bookinfo\"]//a[@href]",
     "xpath_content": "//div[@id=\"content\"]/text()",
     "title_pattern": "(.*)最新章节.*",
+    "index_pattern": ".*/(.*)/(index.html)?",
     "xpath_author": "//meta[@name='keywords']/@content",
+    "xpath_cover": "//img[@class='picborder']/@src",
     "author_pattern": ".*最新章节,(.*),.*,.*"
-  },
-  {
-    "website": "www.3gxs.com",
-    "url_pattern": "http:\\/\\/www.3gxs.com\\/html\\/\\d+\\/\\d+\\/\\d+.html",
-    "charset": "gbk",
-    "xpath_content": "//div[@id=\"content\"]/text()",
-    "xpath_chapters": "//div[@class=\"booklist clearfix\"]//a[@href]",
-    "title_pattern": "(.*),.*"
   },
   {
     "website": "www.ziyouge.com",
     "url_pattern": "http:\\/\\/www.ziyouge.com\\/zy\\/\\d+\\/\\d+\\/\\d+.html",
+    "book_page_pattern": "http://www.ziyouge.com/xs-(index).html",
     "charset": "gbk",
     "xpath_chapters": "//ul[@class=\"chapter-list\"]//a[@href]",
     "xpath_content": "//div[@id=\"htmlContent\"]/text()",
     "title_pattern": "(.*)最新章节.*",
+    "index_pattern": ".*/(.*)/index.html",
     "xpath_author": "//meta[@name='keywords']/@content",
+    "xpath_cover": "//img[@id='htmlfengmiantu']/@src",
     "author_pattern": ".*，(.*)最新作品"
   },
   {

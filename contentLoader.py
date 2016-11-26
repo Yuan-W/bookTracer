@@ -7,6 +7,7 @@ from contentParser import ContentParser
 import codecs
 from yattag import Doc, indent
 from shutil import copyfile
+import urllib2
 
 class DownladThread(threading.Thread):
   def __init__(self, threadID, url, file):
@@ -205,6 +206,12 @@ def main():
 
     with open(file, 'r') as fp:
       book = json.load(fp)
+
+    cover = '%s/cover.jpg' % title
+    if not os.path.exists(cover):
+       img = urllib2.urlopen(book['cover'])
+       with open(cover, 'wb') as fp:
+        fp.write(img.read())
 
     website = book['url'].split('/')[2]
 
