@@ -5,7 +5,9 @@
     "charset": "utf-8",
     "xpath_content": "//div[@id=\"chapterContent\"]//p/text()",
     "xpath_chapters": "//div[@class=\"read_con\"]//a[@href]",
-    "title_pattern": "(.*)最新章节.*"
+    "title_pattern": "(.*)最新章节.*",
+    "xpath_author": "/html/body[@monkeyid='zongheng-showchapter']/@authorname",
+    "author_pattern": "(.*)"
   },
   {
     "website": "www.biquge.com.tw",
@@ -13,7 +15,9 @@
     "charset": "gbk",
     "xpath_chapters": "//div[@id=\"list\"]//a[@href]",
     "xpath_content": "//div[@id=\"content\"]/text()",
-    "title_pattern": "(.*)_.*_.*_.*"
+    "title_pattern": "(.*)_.*_.*_.*",
+    "xpath_author": "//meta[@name='keywords']/@content",
+    "author_pattern": ".*最新章节,(.*)"
   },
   {
     "website": "www.luoqiu.com",
@@ -21,7 +25,9 @@
     "charset": "gbk",
     "xpath_chapters": "//div[@id=\"container_bookinfo\"]//a[@href]",
     "xpath_content": "//div[@id=\"content\"]/text()",
-    "title_pattern": "(.*)最新章节.*"
+    "title_pattern": "(.*)最新章节.*",
+    "xpath_author": "//meta[@name='keywords']/@content",
+    "author_pattern": ".*最新章节,(.*),.*,.*"
   },
   {
     "website": "www.3gxs.com",
@@ -37,7 +43,9 @@
     "charset": "gbk",
     "xpath_chapters": "//ul[@class=\"chapter-list\"]//a[@href]",
     "xpath_content": "//div[@id=\"htmlContent\"]/text()",
-    "title_pattern": "(.*)最新章节.*"
+    "title_pattern": "(.*)最新章节.*",
+    "xpath_author": "//meta[@name='keywords']/@content",
+    "author_pattern": ".*，(.*)最新作品"
   },
   {
     "website": "www.snwx.com",

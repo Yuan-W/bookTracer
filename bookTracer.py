@@ -29,8 +29,10 @@ class TraceThread(threading.Thread):
 
     def updateBook(self):
         book = self._book
-        if 'title' not in book:
-            chapters, book['title'] = self.getChapters(book['url'], True)
+        if 'title' not in book or 'author' not in book:
+            chapters, info= self.getChapters(book['url'], True)
+            (book['title'], book['author'])  = info
+            print book['author']
         else:
             chapters = self.getChapters(book['url'])
 

@@ -51,9 +51,12 @@ class BookParser(Parser):
         title_raw = self._tree.xpath("//title/text()")[0]
         match = re.search(self._rule['title_pattern'], title_raw)
         title = match.group(1)
-        # author_raw = self._tree.xpath("//meta[@name='keywords']/@content")[0]
-        # print author_raw
+        author_raw = self._tree.xpath(self._rule['xpath_author'])[0]
+        print author_raw
+        match = re.search(self._rule['author_pattern'], author_raw)
+        author = match.group(1)
+        print author
         # print title
-        return title
+        return title, author
 
     

@@ -1,4 +1,6 @@
 __pycache__/
+Kindle/
+*.jpg
 *.pyc
 *.txt
 book/
