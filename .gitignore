@@ -1,7 +1,6 @@
 *.jpg
 *.pyc
 *.mobi
-*.txt
 book/
 .DS_Store
 
