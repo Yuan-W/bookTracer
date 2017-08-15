@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from rule import BookRule
+from .context import bookTracer
+from bookTracer.rule import BookRule
 
-ruleFile= 'rules.json'
+ruleFile = 'rules.json'
 
 class GetRuleTestCase(unittest.TestCase):
   def setUp(self):
@@ -16,7 +17,7 @@ class GetRuleTestCase(unittest.TestCase):
     charset = "utf-8"
     xpathContent = "//div[@id=\"chapterContent\"]//p/text()"
     xpathChapters  = "//div[@class=\"read_con\"]//a[@href]"
-    title_pattern = "(.*)无弹窗.*".decode('utf-8')
+    title_pattern = "(.*)最新章节.*".decode('utf-8')
     rule = self.rules.find(website)
 
     self.assertEqual(rule['website'], website)
@@ -32,7 +33,7 @@ class GetRuleTestCase(unittest.TestCase):
     charset = "utf-8"
     xpathContent = "//div[@id=\"chapterContent\"]//p/text()"
     xpathChapters  = "//div[@class=\"read_con\"]//a[@href]"
-    title_pattern = "(.*)无弹窗.*".decode('utf-8')
+    title_pattern = "(.*)最新章节.*".decode('utf-8')
 
     url = 'http://book.zongheng.com/'
     rule = self.rules.find(url)
@@ -50,7 +51,7 @@ class GetRuleTestCase(unittest.TestCase):
     charset = "utf-8"
     xpathContent = "//div[@id=\"chapterContent\"]//p/text()"
     xpathChapters  = "//div[@class=\"read_con\"]//a[@href]"
-    title_pattern = "(.*)无弹窗.*".decode('utf-8')
+    title_pattern = "(.*)最新章节.*".decode('utf-8')
 
     url = 'http://book.zongheng.com/book/572378.html'
     rule = self.rules.find(url)

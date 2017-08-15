@@ -39,7 +39,7 @@ class BookParser(Parser):
             if not prog.match(url):
                 continue
 
-            title = element.text
+            title = element.text.replace('/', '\\')
             chapter = {'title':title, 'url':url}
             # print element.text, url
             if chapter not in chapters:

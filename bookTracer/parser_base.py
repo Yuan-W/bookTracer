@@ -12,7 +12,7 @@ class Parser:
     def loadPage(self, url):
         opener = urllib2.build_opener()
         opener.addheaders = [('User-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36')]
-        resource = opener.open(url)
+        resource = opener.open(url, timeout=10)
         return resource.read()
 
     def getCharset(self):

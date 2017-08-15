@@ -26,9 +26,10 @@ class DownladThread(threading.Thread):
     f.close()
     print "Exiting thread %d" % self._threadID
 
-def generatTxtBook(book):
+def generatTxtBook(output_path, book):
   title = book['title'].encode('utf-8')
-  with open('%s.txt' % title, 'w') as outfile:
+  file_path = os.path.join(output_path, '%s.txt' % title)
+  with open(file_path, 'w') as outfile:
     outfile.write('%s\r\n' % title)
     outfile.write('\r\n%s' % book['author'].encode('utf-8'))
 
@@ -69,7 +70,7 @@ def generateTOC(path, book):
   with open(file_name, 'w') as outfile:
     outfile.write(result.encode('UTF-8'))
 
-def generateContent(path, book):
+def generateContent(path, book, source):
   doc, tag, text = Doc().tagtext()
   doc.asis('''<!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -86,7 +87,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           with tag('div', id='#ch%d' % (i+1)):
             with tag('h2'):
               text(chapter['title'].encode('utf-8'))
-            content_file = os.path.join(book['title'].encode('utf-8'), '%s.txt' % chapter['title'].encode('utf-8'))
+            content_file = os.path.join(source, book['title'].encode('utf-8'), '%s.txt' % chapter['title'].encode('utf-8'))
             with open(content_file) as infile:
               file_content = infile.readlines()
               for line in file_content:
@@ -167,50 +168,55 @@ def generateOPF(path, book):
     outfile.write(result.encode('UTF-8'))
 
 
-def generatKindleBook(book):
+def generatKindleBook(output_path, book):
   title = book['title'].encode('utf-8')
-  path = 'Kindle/%s' % title
+  path = os.path.join(output_path, 'Kindle', title)
   if not os.path.isdir(path):
     os.makedirs(path)
     copyfile('style.css', '%s/style.css' % path)
-    copyfile('%s/cover.jpg' % title, '%s/cover.jpg' % path)
+    cover_path = os.path.join(output_path, title, 'cover.jpg')
+    copyfile(cover_path, '%s/cover.jpg' % path)
 
   generateTOC(path, book)
-  generateContent(path, book)
+  generateContent(path, book, output_path)
   generateNCX(path, book)
   generateOPF(path, book)
 
-def mergeChapters(title, output_format):
+def mergeChapters(title, output_format, output_path):
   book_file = os.path.join('book', '%s.json' % title)
 
   with open(book_file, 'r') as fp:
     book = json.load(fp)
 
   if output_format == 'txt':
-    generatTxtBook(book)
+    generatTxtBook(output_path, book)
   elif output_format == 'kindle':
-    generatKindleBook(book)
+    generatKindleBook(output_path, book)
   
 
 def main():
   path = 'book'
   output_format = 'kindle'
+  output_path = 'build'
 
   # file = os.path.join('book', '%s.json' % title)
 
   for file in glob.glob("%s/*.json" % path):
     title_ext = os.path.basename(file)
     title = os.path.splitext(title_ext)[0]
-    if not os.path.isdir(title):
-      os.mkdir(title)
+    file_folder = os.path.join(output_path, title)
+    if not os.path.isdir(file_folder):
+      os.mkdir(file_folder)
 
     with open(file, 'r') as fp:
       book = json.load(fp)
 
-    cover = '%s/cover.jpg' % title
+    cover = os.path.join(output_path, title, 'cover.jpg')
     if not os.path.exists(cover):
-       img = urllib2.urlopen(book['cover'])
-       with open(cover, 'wb') as fp:
+      print(book['cover'])
+      req = urllib2.Request(book['cover'], headers={'User-Agent' : "Magic Browser"}) 
+      img = urllib2.urlopen(req)
+      with open(cover, 'wb') as fp:
         fp.write(img.read())
 
     website = book['url'].split('/')[2]
@@ -219,7 +225,7 @@ def main():
     threads = []
     i = 1
     for chapter in chapters:
-      content_file = os.path.join(title, '%s.txt' % chapter['title'].encode('utf-8'))
+      content_file = os.path.join(output_path, title, '%s.txt' % chapter['title'].encode('utf-8'))
       if not os.path.exists(content_file):
         thread = DownladThread(i,chapter['url'], content_file)
         thread.start()
@@ -229,7 +235,7 @@ def main():
     for thread in threads:
       thread.join()
     # if len(threads) != 0:
-    mergeChapters(title, output_format)
+    mergeChapters(title, output_format, output_path)
 
 if __name__ == "__main__":
   main()

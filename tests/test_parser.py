@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from bookParser import BookParser
-from coverParser import CoverParser
+from .context import bookTracer
+from bookTracer.bookParser import BookParser
+from bookTracer.coverParser import CoverParser
 
 class getTitleTestCase(unittest.TestCase):
   def test_zongheng(self):
